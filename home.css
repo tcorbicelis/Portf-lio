@@ -334,3 +334,31 @@ nav{
 }
 
 }
+
+/* BOTÃO WHATSAPP FLUTUANTE */
+
+.whatsapp-btn{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:#25D366;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+  z-index:999;
+  transition:0.3s;
+}
+
+.whatsapp-btn img{
+  width:28px;
+  height:28px;
+}
+
+.whatsapp-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px #25D366;
+}
