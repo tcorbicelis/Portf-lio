@@ -362,3 +362,76 @@ nav{
   transform:scale(1.1);
   box-shadow:0 0 15px #25D366;
 }
+
+/* MENU MOBILE */
+
+.menu-toggle{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+nav{
+position:absolute;
+top:70px;
+right:0;
+background:#0A0A0A;
+flex-direction:column;
+width:200px;
+padding:20px;
+display:none;
+border-left:1px solid #111;
+}
+
+nav a{
+margin:10px 0;
+}
+
+nav.active{
+display:flex;
+}
+
+/* HERO */
+
+.hero{
+height:auto;
+padding:120px 20px;
+}
+
+.hero h1{
+font-size:2rem;
+}
+
+/* SECTIONS */
+
+section{
+padding:60px 20px;
+}
+
+/* SKILLS */
+
+.skills-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+/* PROJETOS */
+
+.projects{
+grid-template-columns:1fr;
+}
+
+/* REDE */
+
+.rede-container{
+grid-template-columns:1fr;
+}
+
+}
