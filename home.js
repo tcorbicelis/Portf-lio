@@ -1,4 +1,4 @@
-const text = "ReDedev | Rede de Desenvolvimento";
+const text = "Rede de Desenvolvimento";
 let index = 0;
 
 function typeEffect(){
