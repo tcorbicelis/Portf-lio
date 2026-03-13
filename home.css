@@ -30,33 +30,80 @@ to{transform:translateY(-40px);}
 }
 
 /* HEADER */
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:25px 10%;
-position:sticky;
-top:0;
-background:#0A0A0A;
-z-index:1000;
-border-bottom:1px solid #111;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%; /* diminui o padding para caber melhor */
+  position: sticky;
+  top: 0;
+  background: #0A0A0A;
+  z-index: 1000;
+  border-bottom: 1px solid #111;
+  height: 70px; /* define altura fixa do header */
 }
 
-.logo img{
-height:50px;
+/* SITE-NAME DENTRO DO HEADER */
+.site-name {
+  position: relative; /* não mais fixed, agora dentro do header */
+  font-size: 28px; /* ajusta para caber melhor */
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #e6faff;
+  font-family: 'Poppins', sans-serif;
+  cursor: default;
+  transition: 0.4s ease;
+  animation: fadeSlide 1s ease forwards;
 }
 
-nav a{
-color:white;
-margin-left:25px;
-text-decoration:none;
-font-weight:500;
-transition:0.3s;
+/* LINHA ANIMADA ABAIXO DO TEXTO */
+.site-name::after {
+  content: "";
+  display: block;
+  width: 60%; /* menor que o texto */
+  height: 3px;
+  margin-top: 5px; /* espaço menor */
+  background: linear-gradient(90deg, #4cc9f0, #80ed99);
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s ease;
+  animation: lineGrow 1.2s ease forwards;
+  animation-delay: 0.3s;
 }
 
-nav a:hover{
-color:#4CC9F0;
+/* HOVER */
+.site-name:hover {
+  color: #4CC9F0;
+}
+
+/* NAV - MENU */
+nav {
+  margin-left: auto;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #4CC9F0;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* HERO */
