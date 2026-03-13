@@ -203,7 +203,7 @@ h2{
   font-size: 16px;
 }
 
-/* CONTATO - BOTÃO INSTAGRAM */
+/* CONTATO - BOTÃO INSTAGRAM ESTILO REDEDEV */
 #contato .footer-instagram {
   display: inline-block;
   margin-top: 15px;
@@ -214,24 +214,25 @@ h2{
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af, #515bd4);
-  padding: 8px 18px;
+  background: linear-gradient(90deg,#4CC9F0,#80ED99);
+  padding: 10px 22px;
   border-radius: 30px;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 14px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(76,201,240,0.3);
 }
 
 .instagram-btn img {
   width: 20px;
   height: 20px;
+  filter: invert(1); /* ícone branco */
 }
 
 .instagram-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 20px rgba(76,201,240,0.6);
 }
 
 /* FOOTER */
