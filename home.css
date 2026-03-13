@@ -171,3 +171,12 @@ text-align:center;
 background:#050505;
 opacity:0.7;
 }
+
+/* Remove barra de rolagem horizontal */
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
