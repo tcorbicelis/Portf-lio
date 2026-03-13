@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,9 +11,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
 </head>
 
 <body>
+
+<div class="bg"></div>
 
 <header>
 
@@ -30,9 +35,9 @@
 </header>
 
 
-<section class="hero">
+<section class="hero" data-aos="fade-up">
 
-<h1>ReDedev <span>Developer</span></h1>
+<h1><span id="typing"></span></h1>
 
 <p>
 Colecionando momentos e construindo o futuro
@@ -43,20 +48,20 @@ Colecionando momentos e construindo o futuro
 </section>
 
 
-<section id="sobre">
+<section id="sobre" data-aos="fade-right">
 
 <h2>Sobre Mim</h2>
 
 <p>
 Somos uma rede de desenvolvimento focada em web, sistemas e automações.
-Trabalhando com HTML, CSS, JavaScript, Python, SQL, dentre outros para construir
-soluções eficientes e um desenvolvimento moderno.
+Trabalhando com HTML, CSS, JavaScript, Python e SQL para construir
+soluções eficientes e desenvolvimento moderno.
 </p>
 
 </section>
 
 
-<section id="skills">
+<section id="skills" data-aos="fade-up">
 
 <h2>Skills</h2>
 
@@ -74,7 +79,7 @@ soluções eficientes e um desenvolvimento moderno.
 </section>
 
 
-<section id="projetos">
+<section id="projetos" data-aos="zoom-in">
 
 <h2>Projetos</h2>
 
@@ -82,17 +87,17 @@ soluções eficientes e um desenvolvimento moderno.
 
 <div class="project">
 <h3>Astronomia</h3>
-<p>Um site feito para o estudo do universo</p>
+<p>Um site feito para o estudo do universo.</p>
 </div>
 
 <div class="project">
-<h3>Logica de Programação</h3>
-<p>Um sistema desenvolvido para a pratica da programação</p>
+<h3>Lógica de Programação</h3>
+<p>Sistema criado para praticar conceitos de programação.</p>
 </div>
 
 <div class="project">
 <h3>RDdev</h3>
-<p>Um site/"rede social" voltada para todos da area de TI</p>
+<p>Uma rede social voltada para profissionais da área de TI.</p>
 </div>
 
 </div>
@@ -100,13 +105,13 @@ soluções eficientes e um desenvolvimento moderno.
 </section>
 
 
-<section id="contato">
+<section id="contato" data-aos="fade-left">
 
 <h2>Contato</h2>
 
 <p>Email: rededev0@email.com</p>
 <p>GitHub: github.com/tcorbicelis</p>
-<p>Contato: (22)99747-9689</p>
+<p>Contato: (22) 99747-9689</p>
 
 </section>
 
@@ -116,6 +121,18 @@ soluções eficientes e um desenvolvimento moderno.
 <p>ReDedev © 2026</p>
 
 </footer>
+
+
+<script src="home.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({
+duration:1000,
+once:true
+});
+</script>
 
 </body>
 </html>
