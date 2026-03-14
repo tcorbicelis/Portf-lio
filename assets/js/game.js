@@ -42,7 +42,7 @@ const ship = (() => {
 
 // 💯 Pontuação
 let score = 0;
-let speedMultiplier = 1;
+let speedMultiplier = window.innerWidth < 768 ? 0.7 : 1; // ajuste para mobile
 let doubleShot = false;
 let gameFinished = false;
 let difficultyIncreased = false;
@@ -68,13 +68,19 @@ function updateTimer() {
   timerBoard.innerText = `Tempo: ${elapsed}s`;
   requestAnimationFrame(updateTimer);
 }
+
 updateTimer();
 
 // 📌 Função de colisão
 function isColliding(a, b) {
   const r1 = a.getBoundingClientRect();
   const r2 = b.getBoundingClientRect();
-  return !(r1.top > r2.bottom || r1.bottom < r2.top || r1.left > r2.right || r1.right < r2.left);
+  return !(
+    r1.top > r2.bottom ||
+    r1.bottom < r2.top ||
+    r1.left > r2.right ||
+    r1.right < r2.left
+  );
 }
 
 // 🎇 Explosão
@@ -94,6 +100,7 @@ function spawnBossMeteor() {
 
   const boss = document.createElement('div');
   boss.className = 'meteor boss';
+
   const size = 390;
   const speed = 1;
   const life = 65;
@@ -114,11 +121,14 @@ function spawnBossMeteor() {
       boss.remove();
       return;
     }
+
     boss.style.top = boss.offsetTop + speed + 'px';
+
     if (isColliding(boss, ship)) {
       showGameOver();
       clearInterval(fall);
     }
+
     if (boss.offsetTop > window.innerHeight) {
       boss.remove();
       clearInterval(fall);
@@ -126,7 +136,7 @@ function spawnBossMeteor() {
   }, 16);
 }
 
-// 🎮 Controle da nave
+// 🎮 Controle da nave (teclado)
 const keys = {
   ArrowLeft: false,
   ArrowRight: false,
@@ -146,27 +156,9 @@ document.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
 
-// 📱 Controles Mobile
-const mobileKeys = { left: false, right: false, up: false, down: false, shoot: false };
-const controls = document.createElement('div');
-controls.className = 'mobile-controls';
-controls.innerHTML = `
-  <button id="left">⬅️</button>
-  <button id="up">⬆️</button>
-  <button id="down">⬇️</button>
-  <button id="right">➡️</button>
-  <button id="shoot">🔥</button>
-`;
-document.body.appendChild(controls);
-
-['left','right','up','down','shoot'].forEach(id => {
-  const btn = document.getElementById(id);
-  btn.addEventListener('touchstart', e => { mobileKeys[id] = true; e.preventDefault(); });
-  btn.addEventListener('touchend', e => { mobileKeys[id] = false; e.preventDefault(); });
-});
-
 // 🔫 Tiro
 let canShoot = true;
+
 function shootBullet() {
   if (gameFinished || !canShoot) return;
   canShoot = false;
@@ -192,20 +184,24 @@ function shootBullet() {
         if (bullet.parentElement) bullet.remove();
         return;
       }
+
       bullet.style.top = bullet.offsetTop - 10 + 'px';
       if (bullet.offsetTop < 0) {
         bullet.remove();
         clearInterval(interval);
       }
+
       document.querySelectorAll('.meteor').forEach(meteor => {
         if (isColliding(bullet, meteor)) {
           bullet.remove();
           clearInterval(interval);
+
           const r = meteor.getBoundingClientRect();
-          createExplosion(r.left + r.width/2, r.top + r.height/2);
+          createExplosion(r.left + r.width / 2, r.top + r.height / 2);
           explosionSound.currentTime = 0;
           explosionSound.play();
 
+          // Boss
           if (meteor.classList.contains('boss')) {
             meteor.dataset.life--;
             if (meteor.dataset.life <= 0) {
@@ -216,13 +212,24 @@ function shootBullet() {
             return;
           }
 
+          // Meteoro normal
           const points = Number(meteor.dataset.points);
           score += points;
           scoreBoard.innerText = `Pontos: ${score}`;
 
-          if (score >= 315 && !difficultyIncreased) { speedMultiplier = 1.3; difficultyIncreased = true; }
-          if (score >= 550 && !bossSpawned) { spawnBossMeteor(); }
-          if (score >= 1000) { showVictory(); return; }
+          if (score >= 315 && !difficultyIncreased) {
+            speedMultiplier = 1.3;
+            difficultyIncreased = true;
+          }
+
+          if (score >= 550 && !bossSpawned) {
+            spawnBossMeteor();
+          }
+
+          if (score >= 1000) {
+            showVictory();
+            return;
+          }
 
           meteor.remove();
         }
@@ -237,15 +244,14 @@ function shootBullet() {
 function updateShip() {
   if (gameFinished) return;
 
-  const speed = 7;
+  const speed = 7 * speedMultiplier;
   let left = ship.offsetLeft;
   let top = ship.offsetTop;
 
-  // Desktop e Mobile
-  if (keys.ArrowLeft || mobileKeys.left) left -= speed;
-  if (keys.ArrowRight || mobileKeys.right) left += speed;
-  if (keys.ArrowUp || mobileKeys.up) top -= speed;
-  if (keys.ArrowDown || mobileKeys.down) top += speed;
+  if (keys.ArrowLeft) left -= speed;
+  if (keys.ArrowRight) left += speed;
+  if (keys.ArrowUp) top -= speed;
+  if (keys.ArrowDown) top += speed;
 
   left = Math.max(0, Math.min(left, window.innerWidth - ship.offsetWidth));
   top = Math.max(0, Math.min(top, window.innerHeight - ship.offsetHeight));
@@ -253,10 +259,11 @@ function updateShip() {
   ship.style.left = left + 'px';
   ship.style.top = top + 'px';
 
-  if (keys.Space || mobileKeys.shoot) shootBullet();
+  if (keys.Space) shootBullet();
 
   requestAnimationFrame(updateShip);
 }
+
 updateShip();
 
 // ☄️ Criar meteoros
@@ -269,24 +276,74 @@ setInterval(() => {
   const isSmall = Math.random() < 0.35;
   let size, points, speed;
 
-  if (isSmall) { size = 25; points = 10; speed = (Math.random()*3+4)*speedMultiplier; meteor.classList.add('small'); }
-  else { size = 40; points = 5; speed = (Math.random()*2+2)*speedMultiplier; }
+  if (isSmall) {
+    size = 25;
+    points = 10;
+    speed = (Math.random() * 3 + 4) * speedMultiplier;
+    meteor.classList.add('small');
+  } else {
+    size = 40;
+    points = 5;
+    speed = (Math.random() * 2 + 2) * speedMultiplier;
+  }
 
-  meteor.style.width = size+'px';
-  meteor.style.height = size+'px';
-  meteor.style.left = Math.random()*(window.innerWidth - size)+'px';
-  meteor.style.top = -size+'px';
+  meteor.style.width = size + 'px';
+  meteor.style.height = size + 'px';
+  meteor.style.left = Math.random() * (window.innerWidth - size) + 'px';
+  meteor.style.top = -size + 'px';
+
   meteor.dataset.points = points;
 
   game.appendChild(meteor);
 
   const fall = setInterval(() => {
-    if (gameFinished) { clearInterval(fall); meteor.remove(); return; }
+    if (gameFinished) {
+      clearInterval(fall);
+      meteor.remove();
+      return;
+    }
+
     meteor.style.top = meteor.offsetTop + speed + 'px';
-    if (meteor.offsetTop > window.innerHeight) { meteor.remove(); clearInterval(fall); }
-    if (isColliding(meteor, ship)) { showGameOver(); clearInterval(fall); }
+
+    if (meteor.offsetTop > window.innerHeight) {
+      meteor.remove();
+      clearInterval(fall);
+    }
+
+    if (isColliding(meteor, ship)) {
+      showGameOver();
+      clearInterval(fall);
+    }
   }, 16);
 }, 1000);
+
+// ✅ Controles Touch para mobile
+let touchX = null;
+
+document.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  touchX = touch.clientX;
+
+  // Toque com dois dedos dispara
+  if (e.touches.length > 1) {
+    shootBullet();
+  }
+});
+
+document.addEventListener('touchmove', (e) => {
+  if (touchX === null) return;
+  const touch = e.touches[0];
+  const deltaX = touch.clientX - touchX;
+  touchX = touch.clientX;
+
+  let newLeft = ship.offsetLeft + deltaX;
+  newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - ship.offsetWidth));
+  ship.style.left = newLeft + 'px';
+});
+
+document.addEventListener('touchend', () => {
+  touchX = null;
+});
 
 // 💥 Game Over
 function showGameOver() {
@@ -300,7 +357,8 @@ function showGameOver() {
   box.className = 'victory-box';
   box.innerHTML = `<h1>💥 GAME OVER</h1>
     <p>Você perdeu! 🚀</p>
-    <button onclick="location.reload()">Jogar novamente</button>`;
+    <button onclick="location.reload()">Jogar novamente</button>
+  `;
 
   overlay.appendChild(box);
   document.body.appendChild(overlay);
@@ -316,10 +374,11 @@ function showVictory() {
 
   const box = document.createElement('div');
   box.className = 'victory-box';
-  box.innerHTML = `<h1>🏆 VICTORY!</h1>
+  box.innerHTML = `
+    <h1>🏆 VICTORY!</h1>
     <p>Você chegou aos <strong>1000 pontos</strong> 🚀</p>
-    <button onclick="location.reload()">Jogar novamente</button>`;
-
+    <button onclick="location.reload()">Jogar novamente</button>
+  `;
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 }
