@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ReDedev | Developer Portfolio</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -66,13 +67,10 @@
         <p>
             Mais do que apenas desenvolver sistemas, acreditamos em construir experiências,
             compartilhar conhecimento e fortalecer uma comunidade de pessoas apaixonadas por tecnologia.
-            Nosso trabalho envolve desenvolvimento web, sistemas, automações e soluções digitais
-            modernas que unem criatividade, estratégia e tecnologia.
         </p>
 
         <p>
-            Nosso propósito é simples e poderoso:
-            <strong>colecionar momentos e construir o futuro através da tecnologia.</strong>
+            <strong>Colecionar momentos e construir o futuro através da tecnologia.</strong>
         </p>
 
     </section>
@@ -86,15 +84,10 @@
         <div class="skills-grid">
 
             <div class="skill">HTML</div>
-
             <div class="skill">CSS</div>
-
             <div class="skill">JavaScript</div>
-
             <div class="skill">Python</div>
-
             <div class="skill">SQL</div>
-
             <div class="skill">Outros</div>
 
         </div>
@@ -110,24 +103,38 @@
         <div class="projects">
 
             <div class="project">
+
                 <h3>Astronomia</h3>
                 <p>Um site feito para o estudo do universo.</p>
 
-                <a href="#" class="project-btn">Ver</a>
+                <button class="project-btn" onclick="abrirModalAstronomia()">
+                    Ver
+                </button>
+
             </div>
 
+
             <div class="project">
+
                 <h3>Lógica de Programação</h3>
                 <p>Sistema criado para praticar conceitos de programação.</p>
 
-                <a href="#" class="project-btn">Ver</a>
+                <button class="project-btn">
+                    Ver
+                </button>
+
             </div>
 
+
             <div class="project">
+
                 <h3>RDdev</h3>
                 <p>Uma rede social voltada para profissionais da área de TI.</p>
 
-                <a href="#" class="project-btn" onclick="abrirModal()">Ver</a>
+                <button class="project-btn" onclick="abrirModal()">
+                    Ver
+                </button>
+
             </div>
 
         </div>
@@ -153,14 +160,11 @@
                     eficiência e inovação.
                 </p>
 
-                <p>
-                    Entre em contato conosco e vamos transformar sua ideia em um projeto real.
-                </p>
-
-                <a href="#contato" class="btn">Solicitar Projeto</a>
+                <a href="#contato" class="btn">
+                    Solicitar Projeto
+                </a>
 
             </div>
-
 
 
             <div class="rede-card">
@@ -168,19 +172,15 @@
                 <h3>Para Desenvolvedores</h3>
 
                 <p>
-                    Acreditamos na colaboração e no crescimento coletivo da tecnologia.
                     Se você é desenvolvedor, estudante ou entusiasta da área de TI,
                     você pode fazer parte da ReDedev.
                 </p>
 
-                <p>
-                    Conecte-se conosco, compartilhe ideias e participe de projetos inovadores.
-                </p>
-
-                <a href="#contato" class="btn">Juntar-se à ReDedev</a>
+                <a href="#contato" class="btn">
+                    Juntar-se à ReDedev
+                </a>
 
             </div>
-
 
         </div>
 
@@ -197,7 +197,6 @@
         <p>GitHub: github.com/tcorbicelis</p>
 
         <p>Contato: (22) 99747-9689</p>
-
 
 
         <a href="https://www.instagram.com/_rddev/" target="_blank" class="footer-instagram">
@@ -224,25 +223,17 @@
 
 
 
-    <script src="./js/script.js"></script>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-
-        AOS.init({
-
-            duration: 1000,
-
-            once: true
-
-        });
-
-    </script>
+    <!-- BOTÃO WHATSAPP -->
 
     <a href="https://wa.me/5522997479689" class="whatsapp-btn" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png">
+
     </a>
+
+
+
+    <!-- MODAL RDdev -->
 
     <div id="modal" class="modal">
 
@@ -257,6 +248,51 @@
         </div>
 
     </div>
+
+
+
+    <!-- MODAL ASTRONOMIA -->
+
+    <div id="modalAstronomia" class="modal">
+        <div class="modal-content">
+
+            <span class="close" onclick="fecharModalAstronomia()">×</span>
+
+            <h2>Projeto Astronomia</h2>
+
+            <div class="slider-container">
+                <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+
+                <div class="slider">
+                    <img src="img/astro.png" alt="Projeto Astronomia - Tela 1" class="slide">
+                    <img src="img/astro1.png" alt="Projeto Astronomia - Tela 2" class="slide">
+                </div>
+
+                <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+            </div>
+
+            <p>
+                Site desenvolvido para estudo do universo, planetas e galáxias.
+            </p>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="./js/script.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+
+        AOS.init({
+            duration: 1000,
+            once: true
+        })
+
+    </script>
 
 </body>
 
