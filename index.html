@@ -119,7 +119,7 @@
                 <h3>Lógica de Programação</h3>
                 <p>Sistema criado para praticar conceitos de programação.</p>
 
-                <button class="project-btn">
+                <button class="project-btn" onclick="abrirModalLogica()">
                     Ver
                 </button>
 
@@ -131,9 +131,7 @@
                 <h3>RDdev</h3>
                 <p>Uma rede social voltada para profissionais da área de TI.</p>
 
-                <button class="project-btn" onclick="abrirModal()">
-                    Ver
-                </button>
+                <button class="project-btn" onclick="abrirModalRD()">Ver</button>
 
             </div>
 
@@ -239,7 +237,8 @@
 
         <div class="modal-content">
 
-            <span class="close" onclick="fecharModal()">×</span>
+            <span class="close" onclick="fecharModalRD()">×</span>
+
 
             <h2>Em breve!</h2>
 
@@ -261,25 +260,45 @@
             <h2>Projeto Astronomia</h2>
 
             <div class="slider-container">
-                <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+                <button class="prev" onclick="mudarSlideAstronomia(-1)">&#10094;</button>
 
                 <div class="slider">
                     <img src="assets/img/astro.png" alt="Projeto Astronomia - Tela 1" class="slide">
                     <img src="assets/img/astro1.png" alt="Projeto Astronomia - Tela 2" class="slide">
                 </div>
 
-                <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+                <button class="next" onclick="mudarSlideAstronomia(1)">&#10095;</button>
+
+                <!-- BOTÃO PARA OUTRA PÁGINA -->
+                <a href="pages/game.html" class="project-btn" target="_blank">
+                    Acessar GAME
+                </a>
+
             </div>
-
-            <!-- BOTÃO PARA OUTRA PÁGINA -->
-            <a href="pages/game.html" class="project-btn" target="_blank">
-                Acessar GAME
-            </a>
-
         </div>
     </div>
 
+    <!-- MODAL LÓGICA DE PROGRAMAÇÃO -->
+    <div id="modalLogica" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModalLogica()">×</span>
 
+            <h2>Projeto Lógica de Programação</h2>
+
+            <div class="slider-container">
+                <button class="prev" onclick="mudarSlideLogica(-1)">&#10094;</button>
+
+                <div class="slider">
+                    <img src="assets/img/log.png" alt="Lógica - Tela 1" class="slide">
+                    <img src="assets/img/log1.png" alt="Lógica - Tela 2" class="slide">
+                    <img src="assets/img/log2.png" alt="Lógica - Tela 2" class="slide">
+                    <img src="assets/img/log3.png" alt="Lógica - Tela 2" class="slide">
+                </div>
+
+                <button class="next" onclick="mudarSlideLogica(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
 
 
     <script src="assets/js/script.js"></script>
